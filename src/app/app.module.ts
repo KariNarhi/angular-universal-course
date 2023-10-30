@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_ID, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -44,7 +44,7 @@ import { AppShellNoRenderDirective } from './directives/app-shell-norender.direc
     AppShellNoRenderDirective,
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserModule,
     //BrowserTransferStateModule,
     BrowserAnimationsModule,
     MatMenuModule,
@@ -67,7 +67,14 @@ import { AppShellNoRenderDirective } from './directives/app-shell-norender.direc
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [CoursesService, CourseResolver],
+  providers: [
+    CoursesService,
+    CourseResolver,
+    {
+      provide: APP_ID,
+      useValue: 'serverApp',
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
